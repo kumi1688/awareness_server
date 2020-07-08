@@ -9,6 +9,8 @@ const lightRouter = require('./routes/light');
 const stepRouter = require('./routes/step');
 const activityRouter = require('./routes/activity');
 const accelerometerRouter = require('./routes/accelerometer');
+const generalRouter = require('./routes/general');
+const dataRouter = require('./routes/data');
 
 var app = express();
 
@@ -23,13 +25,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/images')));
+app.use(express.static(path.join(__dirname, 'data/general')));
 
 
+app.use('/data', dataRouter);
 app.use('/location', locationRouter);
 app.use('/light', lightRouter);
 app.use('/step', stepRouter);
 app.use('/activity', activityRouter);
 app.use('/accelerometer', accelerometerRouter);
+app.use('/general', generalRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
