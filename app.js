@@ -11,6 +11,7 @@ const activityRouter = require('./routes/activity');
 const accelerometerRouter = require('./routes/accelerometer');
 const generalRouter = require('./routes/general');
 const dataRouter = require('./routes/data');
+const networkRouter = require('./routes/network')
 
 var app = express();
 
@@ -19,8 +20,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -36,6 +36,7 @@ app.use('/step', stepRouter);
 app.use('/activity', activityRouter);
 app.use('/accelerometer', accelerometerRouter);
 app.use('/general', generalRouter);
+app.use('/network', networkRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
